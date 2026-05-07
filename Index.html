@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registrasi HUT SKST ke-27</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Load CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-container">
+        <!-- Floating Visual Elements -->
+        <div class="decor decor-1"></div>
+        <div class="decor decor-2"></div>
+        <div class="decor decor-3"></div>
+        
+        <!-- ============================================== -->
+        <!-- SCREEN 1: LANDING PAGE                         -->
+        <!-- ============================================== -->
+        <div id="landingScreen" class="screen active">
+            <div class="landing-content">
+                <div class="form-header" style="margin-bottom: 35px; margin-top: 0;">
+                    <div class="logos-container">
+                        <img src="https://www.sementonasa.co.id/wp-content/uploads/2018/08/logo144.png" alt="Semen Tonasa Logo" class="logo-tonasa">
+                        <img src="logo-skst.png" alt="SKST Logo" class="logo-sig" id="logoSKST">
+                    </div>
+                </div>
+                
+                <h1 class="landing-title">HARI ULANG TAHUN KE 27</h1>
+                <p class="landing-subtitle">SERIKAT KARYAWAN SEMEN TONASA</p>
+                
+                <button type="button" class="action-btn" onclick="showScreen('formScreen')">ABSENSI KEHADIRAN</button>
+                <button type="button" class="action-btn" style="margin-top: 15px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));" onclick="window.open('https://drive.google.com/drive/folders/1GqJNSwWX8hnGhv0SJstDvGojGWxDrtL5?usp=sharing', '_blank')">LIHAT DOKUMENTASI</button>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SCREEN 2: FORM REGISTRASI                      -->
+        <!-- ============================================== -->
+        <div id="formScreen" class="screen">
+            <div class="form-wrapper">
+                <div class="crystal-accent"></div>
+                <div class="crystal-accent-2"></div>
+                
+                <div class="form-header">
+                    <!-- Logo Tonasa dan SKST -->
+                    <div class="logos-container">
+                        <img src="https://www.sementonasa.co.id/wp-content/uploads/2018/08/logo144.png" alt="Semen Tonasa Logo" class="logo-tonasa">
+                        <img src="logo-skst.png" alt="SKST Logo" class="logo-sig" id="logoSKSTForm">
+                    </div>
+                    
+                    <!-- Tombol Kembali -->
+                    <div style="text-align: left; margin-top: -10px; margin-bottom: 25px;">
+                        <a href="#" class="back-link" onclick="showScreen('landingScreen'); return false;" title="Kembali ke Beranda">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <h2>RAMAH TAMAH</h2>
+                    <h1>HUT SKST KE-27</h1>
+                    <p>Serikat Karyawan Semen Tonasa</p>
+                </div>
+                
+                <form id="registForm" onsubmit="handleFormSubmit(event)">
+                    <div class="input-group">
+                        <label for="namaKaryawan">Nama</label>
+                        <input type="text" id="namaKaryawan" name="namaKaryawan" placeholder="Masukkan nama lengkap" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="nomorSAP">SAP (Opsional)</label>
+                        <input type="text" id="nomorSAP" name="nomorSAP" placeholder="Masukkan nomor SAP (Opsional)">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="unitKerja">Komisariat/Unit Kerja</label>
+                        <select id="unitKerja" name="unitKerja" required>
+                            <option value="" disabled selected>Pilih Komisariat/Unit Kerja...</option>
+                            <option value="Komisariat Tambang">Komisariat Tambang</option>
+                            <option value="Komisariat Produksi">Komisariat Produksi</option>
+                            <option value="Komisariat Pemeliharaan">Komisariat Pemeliharaan</option>
+                            <option value="Komisariat Distribusi">Komisariat Distribusi</option>
+                            <option value="Komisariat Kantor Pusat">Komisariat Kantor Pusat</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="pesanKesan">Pesan & Kesan</label>
+                        <textarea id="pesanKesan" name="pesanKesan" placeholder="Tuliskan pesan dan kesan Anda untuk SKST..." rows="4" required></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="buktiKehadiran">Upload Bukti Kehadiran (Opsional)</label>
+                        <input type="file" id="buktiKehadiran" accept=".jpg,.jpeg,.png,.pdf">
+                        <small>Format: JPG, PNG, PDF (Maks 50MB)</small>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="action-btn">
+                        <span id="btnText">Kirim Formulir</span>
+                        <span id="btnLoading" class="hidden">Memproses...</span>
+                    </button>
+                </form>
+                
+                <div id="notification" class="notification hidden"></div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SCREEN 3: SUCCESS PAGE                         -->
+        <!-- ============================================== -->
+        <div id="successScreen" class="screen">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <!-- Logo Tonasa dan SKST -->
+                    <div class="logos-container">
+                        <img src="https://www.sementonasa.co.id/wp-content/uploads/2018/08/logo144.png" alt="Semen Tonasa Logo" class="logo-tonasa">
+                        <img src="logo-skst.png" alt="SKST Logo" class="logo-sig" id="logoSKSTSuccess">
+                    </div>
+                </div>
+                
+                <div class="success-content">
+                    <div class="success-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h2>ANDA SUDAH TERDAFTAR</h2>
+                    <p>Terima kasih atas partisipasi Anda pada acara Ramah Tamah HUT ke-27 Serikat Karyawan Semen Tonasa.</p>
+                    
+                    <button type="button" class="action-btn" style="margin-top:20px;" onclick="showScreen('landingScreen');">Selesai</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT FRONT-END -->
+    <script>
+        // Navigasi antar halaman (screeen)
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(function(el) {
+                el.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo(0, 0); // Gulir ke atas ketika pindah layar
+        }
+
+        // Pengolahan File menjadi Base64
+        function getFileData(fileInput) {
+            return new Promise((resolve, reject) => {
+                if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                    resolve(null);
+                    return;
+                }
+                var file = fileInput.files[0];
+
+                if (file.size > 50 * 1024 * 1024) {
+                    reject(new Error("Ukuran file melebihi 50MB"));
+                    return;
+                }
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    resolve({
+                        data: e.target.result.split(',')[1],
+                        mimeType: file.type,
+                        filename: file.name
+                    });
+                };
+                reader.onerror = function(error) {
+                    reject(error);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            const notif = document.getElementById('notification');
+            
+            btn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+            notif.classList.add('hidden');
+            notif.className = 'notification hidden';
+
+            try {
+                const payload = {
+                    namaKaryawan: document.getElementById('namaKaryawan').value,
+                    nomorSAP: document.getElementById('nomorSAP').value,
+                    unitKerja: document.getElementById('unitKerja').value,
+                    pesanKesan: document.getElementById('pesanKesan').value,
+                    fileData: await getFileData(document.getElementById('buktiKehadiran'))
+                };
+                
+                // Mengirim data ke Google Apps Script via POST (Fetch API)
+                const GAS_URL = 'https://script.google.com/macros/s/AKfycbz5vflqx7MpLv6jZURPE5ffeMLoYLtSH2bpm1A_gz_JH4hx-Aw-Xhcbv9zcXwMZscqD/exec';
+                
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8'
+                    }
+                });
+                
+                const result = await response.json();
+
+                if(result.success) {
+                    // FORM BERHASIL => PINDAH KE SUCCESS SCREEN
+                    document.getElementById('registForm').reset();
+                    showScreen('successScreen');
+                } else {
+                    btn.disabled = false;
+                    btnText.classList.remove('hidden');
+                    btnLoading.classList.add('hidden');
+                    notif.classList.remove('hidden');
+                    notif.textContent = "Error: " + result.message;
+                    notif.classList.add('error');
+                }
+                    
+            } catch (err) {
+                btn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+                notif.classList.remove('hidden');
+                notif.textContent = err.message;
+                notif.classList.add('error');
+            }
+        }
+    </script>
+</body>
+</html>
