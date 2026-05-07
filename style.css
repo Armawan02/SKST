@@ -123,7 +123,7 @@
         padding: 0 5px;
     }
 
-    .logo-sig { height: 35px; width: auto; object-fit: contain; }
+    .logo-sig { height: 50px; width: auto; object-fit: contain; }
     .logo-tonasa { height: 50px; width: auto; object-fit: contain; }
 
     .form-header { text-align: center; margin-bottom: 35px; margin-top: 10px; }
